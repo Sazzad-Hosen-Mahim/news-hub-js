@@ -1,3 +1,6 @@
-.category-container{
-    
+.question{
+    background-color: white;
+    height: 540px;
+    width: 70%;
+    padding: 80px;
 }

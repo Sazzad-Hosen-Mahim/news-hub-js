@@ -65,6 +65,10 @@ const displayNews = (data) => {
     // console.log(data);
     // data length work
 
+    
+
+
+
     const newsCounter = document.getElementById('news-counter');
     newsCounter.innerHTML = `
     <h4 class="text-center bg-white p-4">${data.length} news found</h4>
@@ -84,7 +88,7 @@ const displayNews = (data) => {
         newsDiv.style.maxWidth = "100%";
         newsDiv.style.maxHeight = '540px';
         newsDiv.innerHTML = `
-        <div onclick="newsDetails('${newsId}')" id="${newsId}" class="row g-0 p-4 mx-auto" data-bs-toggle="modal" data-bs-target="#newsModal">
+        <div onclick="toggleSpinner(${true})" onclick="newsDetails('${newsId}')" id="${newsId}" class="row g-0 p-4 mx-auto" data-bs-toggle="modal" data-bs-target="#newsModal">
         <div class="col-md-4">
           <img src="${news.thumbnail_url}" class="img-fluid" alt="">
         </div>
@@ -95,7 +99,7 @@ const displayNews = (data) => {
             width: 100%; 
             overflow: hidden;
             text-overflow: ellipsis" class="card-text text-secondary">${news.details.slice(0, 500)}</p>
-            <button onclick="newsDetails('${newsId}')" class='btn btn-primary' data-bs-toggle="modal" data-bs-target="#newsModal">Show News</button>
+            <button id="show-details" onclick="toggleSpinner(${true})" onclick="newsDetails('${newsId}')" class='btn btn-primary' data-bs-toggle="modal" data-bs-target="#newsModal">Show News</button>
 
             <div class="d-flex">
                 <div class='m-4'>
@@ -118,15 +122,32 @@ const displayNews = (data) => {
       </div>
         
         `;
+        
         newsContainer.appendChild(newsDiv);
         
         
         
 
+        toggleSpinner(false);
     })
 
-    
+    // stop spinner 
+toggleSpinner(false)
 }
+
+// spinner section 
+
+const toggleSpinner = isLoading => {
+    const loaderSection = document.getElementById('loader');
+    if(isLoading){
+        loaderSection.classList.remove('d-none');
+    }
+    else{
+        loaderSection.classList.add('d-none');
+    }
+}
+
+
 
 // news details section start
 

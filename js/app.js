@@ -53,7 +53,7 @@ const displayNews = (data) => {
     const newsContainer = document.getElementById('news-container')
     data.forEach(news =>{
         const newsId = news._id;
-        // console.log(news);
+        console.log(news);
         const newsDiv = document.createElement('div');
         // newsDiv.classList.add('card mb-3 container');
         newsDiv.classList.add('card', 'mb-4', 'fluid', 'border-0');
@@ -70,6 +70,20 @@ const displayNews = (data) => {
             <h5 class="card-title">${news.title}</h5>
             <p style="overflow: hidden; text-overflow: ellipsis;" class="card-text text-secondary">${news.details.slice(0, 500)}</p>
             <button onclick="newsDetails('${newsId}')" class='btn btn-primary' data-bs-toggle="modal" data-bs-target="#newsModal">Show News</button>
+
+            <div class="d-flex">
+                <div class='m-4'>
+                    <img width='40px' height='40px' src="${news.author.img}" style="border-radius: 50%;">
+                </div>
+                <div class="mt-3">
+                    <h5>${news.author.name}</h5>
+                    <p class="text-secondary">${news.author.published_date}</p>
+                </div>
+                <div class="mx-5 mt-3">
+                <p>Total view</p>
+                <h6>${news.total_view}</h6>
+                </div>
+            </div>
 
             
 
@@ -88,6 +102,8 @@ const displayNews = (data) => {
 
 // news details section start
 
+// ===========================================================
+
 const newsDetails = async id => {
     // console.log(id);
     const url = `https://openapi.programming-hero.com/api/news/${id}`;
@@ -97,7 +113,7 @@ const newsDetails = async id => {
 }
 
 const displayNewsDetails = details => {
-    console.log(details);
+    // console.log(details);
     const modalTitle = document.getElementById('newsModalLabel');
     modalTitle.innerText = details.title;
 

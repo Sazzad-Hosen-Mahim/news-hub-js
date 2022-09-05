@@ -61,7 +61,7 @@ const displayNews = (data) => {
         newsDiv.style.maxWidth = "840px";
         newsDiv.style.maxHeight = '540px';
         newsDiv.innerHTML = `
-        <div onclick="newsDetails('${newsId}')" id="${newsId}" class="row g-0 p-4">
+        <div onclick="newsDetails('${newsId}')" id="${newsId}" class="row g-0 p-4" data-bs-toggle="modal" data-bs-target="#newsModal">
         <div class="col-md-4">
           <img src="${news.thumbnail_url}" class="img-fluid" alt="">
         </div>
@@ -69,7 +69,10 @@ const displayNews = (data) => {
           <div class="card-body">
             <h5 class="card-title">${news.title}</h5>
             <p style="overflow: hidden; text-overflow: ellipsis;" class="card-text text-secondary">${news.details.slice(0, 500)}</p>
+            <button onclick="newsDetails('${newsId}')" class='btn btn-primary' data-bs-toggle="modal" data-bs-target="#newsModal">Show News</button>
+
             
+
           </div>
         </div>
       </div>
@@ -95,6 +98,11 @@ const newsDetails = async id => {
 
 const displayNewsDetails = details => {
     console.log(details);
+    const modalTitle = document.getElementById('newsModalLabel');
+    modalTitle.innerText = details.title;
+
+    const modalDetails = document.getElementById('modal-detail');
+    modalDetails.innerText = details.details;
 }
 
 
